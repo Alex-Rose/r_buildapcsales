@@ -103,8 +103,8 @@ function printAllTitles(children) {
 }
 
 function searchTitles(low, high) {
-  //const regex1 = config.PRODUCTS[0].regex;
-  const regex1 = /(RAM)/gmi;
+  const regex1 = config.PRODUCTS[0].regex;
+  //const regex1 = /(RAM)/gmi;
   const priceRegex = /((\$+\ *[0-9]+(\.[0-9]{2})?(\ *\$+)?)|([0-9]+(\.[0-9]{2})))/gm;
   low = config.PRODUCTS[0].low;
   high = config.PRODUCTS[0].high;
@@ -288,5 +288,5 @@ async function main(runFull = false) {
   await saveFile().catch(console.log);
 }
 
-main(true);
+main();
 //getContent();
