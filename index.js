@@ -109,16 +109,12 @@ function searchTitles(low, high) {
   low = config.PRODUCTS[0].low;
   high = config.PRODUCTS[0].high;
 
-  low = 20;
-  high = 100;
   for (const i in posts) {
     const title = posts[i].title;
 
     if (title.match(regex1)) {
       console.log(`Title match ${title}`);
       const prices = title.match(priceRegex);
-
-      
 
       let matchedPrice = 0;
       let sendMail = false;
@@ -261,11 +257,14 @@ async function main(runFull = false) {
   await loadFile().catch((err) => {
     console.log(err);
     lastPostId = undefined;
+  });
+
+  if (!dailyDigest) {
     dailyDigest = {
       time: 0,
       posts: []
     };
-  });
+  }
 
   let last = runFull ? undefined : lastPostId;
   
