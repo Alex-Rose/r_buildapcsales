@@ -86,8 +86,8 @@ async function getContent(last = undefined) {
   
       if (data.data.children.length > 0) {
         
-        lastPostId = data.data.children[0].data.name;
-        resolve(data.data.before);
+        let newLast = data.data.children[0].data.name;
+        resolve(newLast);
       } else {
         resolve();
       }
@@ -267,15 +267,34 @@ async function main(runFull = false) {
   }
 
   let last = runFull ? undefined : lastPostId;
-  
+  let previousLastPostId = lastPostId;
+
   try {
     do {
       last = await getContent(last);
+      if (last) {
+        lastPostId = last;
+      }
     } while (last);
   } catch (err) {
     console.log(err);
   }
   
+  // If no new posts, check that the previous post wasn't deleted
+  if (posts.length === 0) {
+    let newLast =  await getContent();
+    if (previousLastPostId === newLast) {
+      if (posts.length === 0) {
+        console.log(`Something's wrong. 0 new posts`);
+      } else {
+        console.log(`No new posts since {${previousLastPostId}}: \n${posts[0].title}`);
+        posts = [];
+      }
+    } else {
+      console.log(`Previous post {${previousLastPostId}} was no longer available`);
+    }
+  }
+
   searchTitles(posts);
 
   const body = getMailBody(matchedItemList, 'Here are most recent posts');
