@@ -40,7 +40,7 @@ async function saveFile() {
   return new Promise((resolve, reject) => {
     const data = {
       last: lastPostId,
-      dailyDigest: dailyDigest
+      dailyDigest: dailyDigest,
     };
     
     fs.writeFile(config.LAST_FILE, JSON.stringify(data), (err) => {
@@ -292,6 +292,7 @@ async function main(runFull = false) {
       }
     } else {
       console.log(`Previous post {${previousLastPostId}} was no longer available`);
+      lastPostId = newLast;
     }
   }
 
