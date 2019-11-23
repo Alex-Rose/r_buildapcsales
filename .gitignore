@@ -1,3 +1,4 @@
 config.js
 last.json
 node_modules/*
+.vscode/*
