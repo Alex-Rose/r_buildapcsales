@@ -11,6 +11,17 @@ class Product {
         this.m_data = data;
     }
 
+    static getFromJson(json) {
+        let product = new Product();
+        product.source = json.m_source;
+        product.id = json.m_id;
+        product.displayName = json.m_displayName;
+        product.title = json.m_title;
+        product.price = json.m_price;
+        product.data = json.m_data;
+        return product;
+    }
+
     initializeData() {
         if (this.m_source == 'reddit') {
             this.m_id = this.m_data.name;

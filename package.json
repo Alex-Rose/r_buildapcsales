@@ -1,14 +1,15 @@
 {
-    "name": "reddit_bapcs",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
-      "test": "echo \"No tests yet...\""
-    },
-    "dependencies": {
-      "nodemailer": "^6.3.1",
-      "request": "^2.88.0"
-    },
-    "devDependencies": {}
+  "name": "reddit_bapcs",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "nodemailer": "^6.3.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.0"
   }
-  
+}

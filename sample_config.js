@@ -4,8 +4,8 @@ module.exports = Object.freeze({
         host: '127.0.0.1',
         port: 25,
         tls: {
-          // do not fail on invalid certs
-          rejectUnauthorized: false
+            // do not fail on invalid certs
+            rejectUnauthorized: false
         }
     },
     EMAIL_FROM: 'buildapcsales <buildapcsales@example.com>',
