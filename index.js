@@ -158,14 +158,7 @@ async function main(runFull = false) {
         }
     }
 
-    //searchTitles(posts);
     s_prodManager.searchTitles(posts);
-
-    // const body = getMailBody(matchedItemList, 'Here are most recent posts');
-    // const plainText = getMailPlainText(matchedItemList);
-    // await sendMail(body, plainText).catch(console.error);
-
-    // await sendDailyDigestIfNeeded();
 
     s_mailManager.sendMailsAndCleanup();
 
@@ -173,4 +166,3 @@ async function main(runFull = false) {
 }
 
 main(true);
-//getContent();
