@@ -6,7 +6,7 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "nodemailer": "^6.3.1",
+    "nodemailer": "^6.4.16",
     "request": "^2.88.0"
   },
   "devDependencies": {
