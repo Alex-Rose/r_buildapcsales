@@ -1,4 +1,4 @@
-const request = require('request');
+const fetch = require('node-fetch');
 const fs = require('fs');
 const config = require('./config.js');
 const ProductManager = require('./productManager.js');
@@ -79,32 +79,30 @@ async function getContent(last = undefined) {
 
         console.log(url);
 
-        request(url, (error, response, body) => {
-            // console.error('error:', error); 
-            // console.log('statusCode:', response && response.statusCode); 
+        fetch(url)
+            .then(async (response) => {
+                if (!response.ok) {
+                    return reject('Bad response ' + response.status + ' ' + response.statusText);
+                }
+                const data = await response.json();
+                printAllTitles(data.data.children);
 
-            if (!response || response.statusCode != 200) {
-                return reject('Bad response ' + JSON.stringify(response));
-            }
-  
-            const data = JSON.parse(body);
-            printAllTitles(data.data.children);
-  
-            for (const p in data.data.children) {
-                const product = new Product('reddit', data.data.children[p].data);
-                product.initializeData();
-                // posts.push(data.data.children[p].data);
-                posts.push(product);
-            }
-  
-            if (data.data.children.length > 0) {
-        
-                let newLast = data.data.children[0].data.name;
-                resolve(newLast);
-            } else {
-                resolve();
-            }
-        });
+                for (const p in data.data.children) {
+                    const product = new Product('reddit', data.data.children[p].data);
+                    product.initializeData();
+                    posts.push(product);
+                }
+
+                if (data.data.children.length > 0) {
+                    let newLast = data.data.children[0].data.name;
+                    resolve(newLast);
+                } else {
+                    resolve();
+                }
+            })
+            .catch((err) => {
+                reject(err);
+            });
     });
 }
 
